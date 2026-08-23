@@ -1,8 +1,9 @@
 import random
+import traceback
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -29,6 +30,11 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Pokédex Kanto Ultra", lifespan=lifespan)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
+
+
+@app.exception_handler(Exception)
+async def debug_exception_handler(request: Request, exc: Exception):
+    return PlainTextResponse(traceback.format_exc(), status_code=500)
 
 
 @app.get("/", response_class=HTMLResponse)
