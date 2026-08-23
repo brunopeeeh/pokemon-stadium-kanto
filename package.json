@@ -1,0 +1,16 @@
+{
+  "name": "pokemon",
+  "version": "1.0.0",
+  "description": "Um jogo RPG tático de combate Pokémon inspirado em **Pokémon Stadium** e **Pokémon Black & White**, desenvolvido com **FastAPI (Python)** no backend e **Phaser.js 3 (WebGL)** + Vanilla CSS no frontend.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "phaser": "^3.88.2"
+  }
+}

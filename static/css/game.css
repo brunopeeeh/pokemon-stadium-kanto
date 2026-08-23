@@ -1,0 +1,1114 @@
+:root {
+    --bg-color: #050509;
+    --card-bg: rgba(14, 14, 24, 0.9);
+    --card-hover-bg: rgba(22, 22, 38, 0.96);
+    --sub-card-bg: rgba(9, 9, 16, 0.94);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-glow: rgba(0, 240, 255, 0.28);
+    --text-color: #f5f5fa;
+    --text-muted: #9595aa;
+    --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    --primary-color: #ff3366;
+    --primary-glow: rgba(255, 51, 102, 0.4);
+    --gold: #FFD700;
+    --gold-glow: rgba(255, 215, 0, 0.35);
+    --green: #39FF14;
+    --green-glow: rgba(57, 255, 20, 0.35);
+    --cyan: #00F0FF;
+    --cyan-glow: rgba(0, 240, 255, 0.4);
+    --purple: #B026FF;
+}
+
+/* Tema Retrô Game Boy DMG */
+body.retro-mode {
+    --bg-color: #8b956d;
+    --card-bg: #9bbc0f;
+    --card-hover-bg: #8bac0f;
+    --sub-card-bg: #8bac0f;
+    --border-color: #0f380f;
+    --border-glow: none;
+    --text-color: #0f380f;
+    --text-muted: #306230;
+    --font-family: 'Press Start 2P', monospace;
+    --primary-color: #0f380f;
+    --primary-glow: none;
+    --gold: #0f380f;
+    --gold-glow: none;
+    --green: #0f380f;
+    --green-glow: none;
+    --cyan: #0f380f;
+    --cyan-glow: none;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: var(--font-family);
+    background: var(--bg-color);
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.1) 0%, transparent 60%),
+        radial-gradient(circle at 90% 100%, rgba(255, 51, 102, 0.07) 0%, transparent 50%),
+        radial-gradient(circle at 10% 100%, rgba(57, 255, 20, 0.05) 0%, transparent 50%);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 1.2rem;
+    margin: 0;
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.retro-mode .card,
+body.retro-mode button,
+body.retro-mode .team-slot,
+body.retro-mode .dojo-card,
+body.retro-mode .bracket-match,
+body.retro-mode .fighter-cmd-card,
+body.retro-mode .move-btn,
+body.retro-mode .target-btn {
+    border: 2px solid #0f380f !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+body.retro-mode .badge,
+body.retro-mode .mode-pill,
+body.retro-mode .coin-badge,
+body.retro-mode [style*="linear-gradient"] {
+    background: #9bbc0f !important;
+    color: #0f380f !important;
+    border: 2px solid #0f380f !important;
+    box-shadow: none !important;
+}
+
+/* CONTAINER WIDESCREEN (1380px) */
+.container {
+    width: 100%;
+    max-width: 1380px;
+}
+
+/* Header Superior Dashboard */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 10px 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.trainer-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.app-title-glow {
+    font-weight: 900;
+    font-size: 1.18rem;
+    letter-spacing: 0.6px;
+    background: linear-gradient(135deg, #ffffff, #80d8ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mode-pill {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.mode-pill.easy {
+    background: rgba(57, 255, 20, 0.12);
+    border: 1px solid var(--green);
+    color: var(--green);
+    box-shadow: 0 0 12px var(--green-glow);
+}
+
+.mode-pill.hard {
+    background: rgba(255, 51, 102, 0.12);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    box-shadow: 0 0 12px var(--primary-glow);
+}
+
+.coin-badge {
+    background: rgba(255, 215, 0, 0.12);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 0 14px var(--gold-glow);
+}
+
+.top-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.btn-top {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-top:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--cyan);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(0, 240, 255, 0.25);
+}
+
+/* Barra de Abas Dashboard */
+.tab-bar {
+    display: flex;
+    gap: 8px;
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    padding: 6px;
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1.2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.tab-btn {
+    flex: 1;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    padding: 12px 10px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.tab-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.18), rgba(255, 51, 102, 0.18));
+    border: 1px solid rgba(0, 240, 255, 0.45);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(18px);
+    border-radius: 16px;
+    padding: 1.4rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.65);
+}
+
+/* ================= ABA 1: MEU TIME ================= */
+.team-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+    gap: 16px;
+}
+
+.team-slot {
+    background: var(--sub-card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.team-slot::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--cyan), var(--primary-color));
+}
+
+.team-slot:hover {
+    border-color: rgba(0, 240, 255, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 240, 255, 0.18);
+}
+
+.slot-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.slot-sprite-box {
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, rgba(0, 0, 0, 0.65) 75%);
+    border-radius: 12px;
+    width: 84px;
+    height: 84px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+    position: relative;
+}
+
+.slot-sprite { width: 68px; height: 68px; image-rendering: pixelated; }
+
+.slot-pos-tag {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    background: #1b1b2a;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    color: var(--cyan);
+}
+
+.slot-level-badge {
+    position: absolute;
+    bottom: -5px;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.slot-details { flex: 1; }
+.slot-title { display: flex; justify-content: space-between; align-items: center; }
+.slot-title h4 { margin: 0; font-size: 1.05rem; font-weight: 800; letter-spacing: 0.3px; }
+
+.slot-xp-bar-bg {
+    background: rgba(0, 0, 0, 0.6);
+    height: 7px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    margin: 8px 0;
+}
+
+.slot-xp-bar-fill {
+    background: linear-gradient(90deg, var(--cyan), var(--green));
+    height: 100%;
+    transition: width 0.4s ease;
+}
+
+.slot-stat-meters {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px 12px;
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 5px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.stat-item strong { color: #fff; }
+
+.btn-evolve-slot {
+    background: linear-gradient(135deg, #FFD700, #FF6F00);
+    color: #111;
+    font-weight: 900;
+    letter-spacing: 0.3px;
+    border: none;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    margin-top: 12px;
+    width: 100%;
+    box-shadow: 0 0 16px var(--gold-glow);
+    transition: all 0.2s ease;
+}
+
+.btn-evolve-slot:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 24px var(--gold);
+}
+
+/* ================= ABA 2: DOJO DE TREINO ================= */
+.member-selector { display: flex; gap: 10px; margin-bottom: 1.2rem; }
+
+.member-select-btn {
+    flex: 1;
+    background: var(--sub-card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 10px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.member-select-btn:hover {
+    border-color: var(--cyan);
+    background: rgba(0, 240, 255, 0.06);
+}
+
+.member-select-btn.active {
+    border-color: var(--cyan);
+    color: #fff;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.14), rgba(255, 51, 102, 0.14));
+    font-weight: bold;
+    box-shadow: 0 0 18px var(--cyan-glow);
+}
+
+.member-select-btn img { width: 44px; height: 44px; image-rendering: pixelated; }
+
+.dojo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 12px; }
+
+.dojo-card {
+    background: var(--sub-card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.dojo-card:hover {
+    border-color: rgba(255, 215, 0, 0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.train-action-btn {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.16), rgba(255, 111, 0, 0.24));
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-weight: 800;
+    padding: 9px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.82rem;
+    transition: all 0.2s ease;
+}
+
+.train-action-btn:hover {
+    background: var(--gold);
+    color: #111;
+    box-shadow: 0 0 18px var(--gold-glow);
+}
+
+/* ================= ABA 3: TORNEIO STADIUM ================= */
+.tier-selector { display: flex; gap: 8px; margin-bottom: 1.2rem; overflow-x: auto; padding-bottom: 2px; }
+
+.tier-tab {
+    flex: 1;
+    padding: 10px 8px;
+    border-radius: 10px;
+    background: var(--sub-card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.tier-tab:hover { border-color: rgba(255, 255, 255, 0.25); color: #fff; }
+
+.tier-tab.active {
+    color: #fff;
+    border-color: var(--gold);
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.18), rgba(255, 51, 102, 0.18));
+    box-shadow: 0 0 16px var(--gold-glow);
+}
+
+.bracket-tree { display: flex; flex-direction: column; gap: 10px; margin: 1.2rem 0; }
+
+.bracket-match {
+    background: var(--sub-card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.88rem;
+}
+
+.bracket-match.current {
+    border: 1.5px solid var(--cyan);
+    background: linear-gradient(90deg, rgba(0, 240, 255, 0.12), transparent);
+    box-shadow: 0 0 18px var(--cyan-glow);
+}
+
+.btn-start-stadium {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary-color), #d32f2f);
+    color: #fff;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.05rem;
+    margin-top: 1.2rem;
+    box-shadow: 0 4px 24px var(--primary-glow);
+    transition: all 0.2s ease;
+}
+
+.btn-start-stadium:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(255, 51, 102, 0.65);
+}
+
+/* ================= ARENA PHASER STADIUM (CENTRO & CARDS ABAIXO) ================= */
+.stadium-arena-wrapper {
+    display: none;
+    background: #040407;
+    border: 1.5px solid rgba(0, 240, 255, 0.3);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+    padding: 16px;
+}
+
+.stadium-arena-wrapper.active { display: block; }
+
+/* 1. Estádio Central Superior */
+.stadium-center-stage {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.stadium-header-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--sub-card-bg);
+    border: 1px solid var(--border-color);
+    padding: 10px 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.canvas-box-fixed {
+    width: 100%;
+    max-width: 860px;
+    aspect-ratio: 860 / 375;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #06060e;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);
+    margin: 10px 0;
+}
+
+#phaser-stadium-canvas {
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#phaser-stadium-canvas canvas {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    border-radius: 10px;
+}
+
+.stadium-center-stage .interactive-log {
+    width: 100%;
+    max-width: 860px;
+}
+
+/* 2. Deck de Comandos Táticos Inferior (3 Cards em Linha) */
+.stadium-command-deck {
+    width: 100%;
+    background: var(--sub-card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 14px;
+    margin-top: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.stadium-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 800;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.fighters-cmd-grid-3cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: 14px;
+    margin: 12px 0 8px 0;
+}
+
+/* ================= FIGHTER COMMAND PODS (CARDS TÁTEIS) ================= */
+.fighter-cmd-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fighter-cmd-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0; width: 4px;
+    background: var(--cyan);
+}
+
+.fighter-cmd-card.captain::before {
+    background: var(--gold);
+}
+
+.fighter-cmd-card.fainted {
+    opacity: 0.35;
+    filter: grayscale(1);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.fighter-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.fighter-avatar-box {
+    width: 48px;
+    height: 48px;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, rgba(0, 0, 0, 0.7) 80%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.fighter-avatar-box img {
+    max-width: 42px;
+    max-height: 42px;
+    image-rendering: pixelated;
+}
+
+.fighter-card-title {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.fighter-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fighter-title-row strong {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.fighter-hp-mini-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2px;
+}
+
+.fighter-hp-mini-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.fighter-hp-mini-fill {
+    height: 100%;
+    transition: width 0.35s ease;
+}
+
+.fighter-hp-text {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    font-family: monospace;
+}
+
+/* 4 Botões de Golpes Reais Arcade */
+.moves-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 7px;
+}
+
+.move-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1.5px solid var(--border-color);
+    color: #fff;
+    border-radius: 9px;
+    padding: 8px 10px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.move-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+.move-btn.selected {
+    border-color: var(--cyan) !important;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.25), rgba(0, 240, 255, 0.08)) !important;
+    box-shadow: 0 0 14px var(--cyan-glow);
+}
+
+.move-btn-name {
+    font-weight: 800;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.82rem;
+}
+
+.move-btn-sub {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+}
+
+.move-type-pill {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 800;
+    color: #111;
+    font-size: 0.62rem;
+    letter-spacing: 0.3px;
+}
+
+/* Seletor de Alvo Tático com Nomes */
+.target-selector-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.target-selector-row span.target-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-weight: 800;
+    min-width: 42px;
+}
+
+.target-btn {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: center;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.target-btn:hover {
+    color: #fff;
+    border-color: var(--gold);
+    background: rgba(255, 215, 0, 0.08);
+}
+
+.target-btn.selected {
+    background: rgba(255, 215, 0, 0.22);
+    border-color: var(--gold);
+    color: var(--gold);
+    font-weight: 800;
+    box-shadow: 0 0 12px var(--gold-glow);
+}
+
+.target-btn.disabled {
+    opacity: 0.22;
+    pointer-events: none;
+    border-style: dashed;
+}
+
+.target-badge-aoe {
+    flex: 1;
+    text-align: center;
+    color: var(--cyan);
+    font-weight: 800;
+    font-size: 0.78rem;
+    letter-spacing: 0.6px;
+    padding: 5px;
+    background: rgba(0, 240, 255, 0.1);
+    border-radius: 6px;
+    border: 1px dashed var(--cyan);
+    animation: pulseGlow 1.8s infinite alternate;
+}
+
+.target-badge-self {
+    flex: 1;
+    text-align: center;
+    color: var(--green);
+    font-weight: 800;
+    font-size: 0.78rem;
+    letter-spacing: 0.6px;
+    padding: 5px;
+    background: rgba(57, 255, 20, 0.1);
+    border-radius: 6px;
+    border: 1px dashed var(--green);
+}
+
+@keyframes pulseGlow {
+    from { box-shadow: 0 0 4px var(--cyan-glow); }
+    to { box-shadow: 0 0 14px var(--cyan); }
+}
+
+/* Botão de Execução do Turno */
+.btn-execute-stadium-turn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--green), var(--cyan));
+    color: #06060b;
+    font-weight: 900;
+    letter-spacing: 0.7px;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.02rem;
+    margin-top: 6px;
+    box-shadow: 0 0 24px rgba(57, 255, 20, 0.4);
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+}
+
+.btn-execute-stadium-turn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 0 35px rgba(0, 240, 255, 0.7);
+}
+
+.btn-execute-stadium-turn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Terminal de Log de Combate */
+.interactive-log {
+    background: #030306;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px 16px;
+    height: 120px;
+    overflow-y: auto;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: #d8d8e4;
+    font-family: 'Outfit', monospace;
+}
+
+.battle-end-banner {
+    display: none;
+    background: var(--card-bg);
+    border: 2px solid var(--gold);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 16px;
+    box-shadow: 0 0 40px var(--gold-glow);
+}
+
+.battle-end-banner.active { display: block; animation: popIn 0.3s ease; }
+
+@keyframes popIn {
+    from { transform: scale(0.96); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Modais */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 1rem;
+}
+
+.modal-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--primary-color);
+    border-radius: 18px;
+    padding: 1.8rem;
+    max-width: 520px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    text-align: center;
+    box-shadow: 0 18px 45px var(--primary-glow);
+}
+
+.mode-choice-container { display: flex; gap: 14px; margin: 1.4rem 0; }
+
+.mode-card {
+    flex: 1;
+    background: var(--sub-card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 18px 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.mode-card:hover {
+    border-color: var(--cyan);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px var(--cyan-glow);
+}
+
+.mode-card h3 { margin: 0 0 6px 0; font-size: 1.05rem; font-weight: 800; }
+.mode-card p { font-size: 0.8rem; color: var(--text-muted); margin: 0; line-height: 1.4; }
+
+.starter-pool-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    max-height: 280px;
+    overflow-y: auto;
+    margin: 1rem 0;
+    padding: 6px;
+    background: var(--sub-card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.starter-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 6px 4px;
+    cursor: pointer;
+    font-size: 0.72rem;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s ease;
+}
+
+.starter-item:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.starter-item.selected {
+    border: 2px solid var(--green);
+    background: rgba(57, 255, 20, 0.14);
+    box-shadow: 0 0 14px var(--green-glow);
+}
+
+.starter-item img { width: 46px; height: 46px; image-rendering: pixelated; }
+
+.btn-confirm-team {
+    width: 100%;
+    background: var(--green);
+    color: #111;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    border: none;
+    padding: 13px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    margin-top: 10px;
+    box-shadow: 0 0 18px var(--green-glow);
+}
+
+.btn-confirm-team:disabled { opacity: 0.35; cursor: not-allowed; box-shadow: none; }
+
+/* ================= RESPONSIVIDADE ================= */
+
+/* Tablet (<=1024px): reduz respiro lateral e encolhe a arena proporcionalmente */
+@media (max-width: 1024px) {
+    body { padding: 1rem; }
+    .canvas-box-fixed { max-width: 100%; }
+}
+
+/* Mobile e tablets pequenos (<=768px) */
+@media (max-width: 768px) {
+    body { padding: 0.7rem; }
+
+    .top-bar {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px 14px;
+    }
+
+    .trainer-meta {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .app-title-glow { font-size: 1rem; }
+
+    .top-actions {
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .btn-top {
+        font-size: 0.72rem;
+        padding: 6px 10px;
+    }
+
+    .tab-bar { padding: 6px; gap: 6px; }
+    .tab-btn { font-size: 0.76rem; padding: 10px 6px; }
+
+    .card { padding: 1rem; border-radius: 14px; }
+
+    .team-container,
+    .dojo-grid,
+    .fighters-cmd-grid-3cols {
+        grid-template-columns: 1fr;
+    }
+
+    .mode-choice-container { flex-direction: column; }
+
+    .starter-pool-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .stadium-arena-wrapper { padding: 10px; }
+    .stadium-command-deck { padding: 10px; }
+
+    .modal-card { padding: 1.2rem; }
+}
+
+/* Celulares pequenos (<=420px) */
+@media (max-width: 420px) {
+    .trainer-meta { gap: 6px; }
+    .app-title-glow { font-size: 0.86rem; }
+    .coin-badge, .mode-pill { font-size: 0.68rem; padding: 4px 8px; }
+    .btn-top { font-size: 0.66rem; padding: 5px 8px; }
+    .tab-btn { font-size: 0.68rem; padding: 8px 4px; }
+    .starter-pool-grid { grid-template-columns: repeat(2, 1fr); }
+    .slot-sprite-box { width: 64px; height: 64px; }
+    .slot-sprite { width: 52px; height: 52px; }
+    .btn-start-stadium, .btn-execute-stadium-turn { font-size: 0.85rem; padding: 12px; }
+}
